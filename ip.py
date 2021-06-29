@@ -25,7 +25,7 @@ class Ipv4NetworkCalc():
         if self.mascara:
             self.mascara_bin  = self.ip_decimal_binario(self.mascara)
             self.prefixo_mascara()
-            print(self.mascara_bin)
+            
 
         self.set_numero_hosts()
         self.set_rede_broadcast()
@@ -38,7 +38,6 @@ class Ipv4NetworkCalc():
                 mascara_bin += '1'
             else:
                 mascara_bin += '0'
-
         self.mascara = self.ip_binario_ip_decimal(mascara_bin)
 
 
@@ -57,18 +56,13 @@ class Ipv4NetworkCalc():
         self.rede = self.ip_binario_ip_decimal(rede)
         self.broadcast = self.ip_binario_ip_decimal(broadcast)
 
-
-        print( self.rede, self.broadcast )
-
     def ip_binario_ip_decimal(self, ip=''):
         novo_ip = str(int(ip[0:8], 2))+'.'
         novo_ip += str(int(ip[8:16], 2)) + '.'
         novo_ip += str(int(ip[16:24], 2)) + '.'
         novo_ip += str(int(ip[24:32], 2))
+        print(novo_ip)
         return novo_ip
-
-
-
 
 
     def set_numero_hosts(self):
@@ -82,7 +76,6 @@ class Ipv4NetworkCalc():
         for bit in mascara_bin:
             if bit == '1':
                 conta += 1
-
         self.prefixo = conta
 
 
@@ -117,6 +110,25 @@ class Ipv4NetworkCalc():
         if ip_regexp.search(self.ip):
             return True
         return False
+    
+    def getIP(self):
+        return self.ip
+    
+    def getPrefixo(self):
+        return self.prefixo
+    
+    def getMascara(self):
+        return self.mascara
+    
+    def getRede(self):
+        return self.rede
+    
+    def getBroadcast(self):
+        return self.broacast
+    
+    def getHosts(self):
+        return self.numero_ips
+    
 
     def fetAll(self):
         return {
@@ -127,7 +139,8 @@ class Ipv4NetworkCalc():
             'broadcast': self.broadcast,
             'numero_ips': self.numero_ips
         }
-
+"""
 if __name__ == '__main__':
     ipv4 = Ipv4NetworkCalc(ip='10.0.125.180', prefixo='25')
     print(ipv4.fetAll())
+"""
